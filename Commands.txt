@@ -1,1 +1,2 @@
 To Run: flask --app celestialIntegration run --debug
+To Initialize DB: flask --app celestialIntegration init-db
