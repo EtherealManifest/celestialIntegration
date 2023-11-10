@@ -58,7 +58,9 @@ def get_post(id, check_author=True):
         abort(403)
 
     return post
-
+@bp.route('/newpage')
+def new_page():
+    return render_template('blog/new_page.html')
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
