@@ -1,5 +1,6 @@
 import requests
 import pprint
+import Establish
 
 '''https://stellarium.org/doc/head/remoteControlApi.html#rcStelPropertyService'''
 '''THis is the site for the documentation. Cool stuff!'''
@@ -30,7 +31,9 @@ def find_object_in_stellarium(object_name):
 def main_poll(param1 = -2, param2 = -2):
     BASE_URL = "http://localhost:8090/api/main/status"
     #for the first poll, we are passing -2 for both parameters. this will return a full list of the properties.
+
     response = requests.get(BASE_URL, params={'actionId': param1, 'propId': param2})
+
 
     # Check if the response is successful
     if response.status_code == 200:
@@ -77,11 +80,12 @@ def location_search():
 # data = find_object_in_stellarium(object_to_find)
 
 #first, send it with -2, -2
-data = main_poll()
+#data = main_poll()
 #print(data['actionChanges']['id'])
 #print(data['propertyChanges']['id'])
-
-data = main_poll(data['actionChanges']['id'], data['propertyChanges']['id'])
-pprint.pprint(data)
+connect = Establish.confirm_connection()
+if(connect != 1):
+    data = main_poll(data['actionChanges']['id'], data['propertyChanges']['id'])
+pprint.pprint(connect)
 
 #now ae wanna try to change some stuff.
